@@ -1,16 +1,13 @@
 {
-  "name": "watercooler-portal",
+  "name": "slack-bot",
   "version": "0.1.0",
-  "description": "A portal for connecting distributed offices through Slack",
+  "description": "Simple Slack Bot",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [],
   "author": "Goutham Reddy",
   "license": "ISC",
   "dependencies": {
     "@slack/client": "^2.3.0",
-    "xmlhttprequest": "^1.8.0"
+    "superagent": "^1.8.3"
   }
 }
