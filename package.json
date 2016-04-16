@@ -1,13 +1,24 @@
 {
-  "name": "slack-bot",
+  "name": "water-cooler-bot",
   "version": "0.1.0",
-  "description": "Simple Slack Bot",
-  "main": "index.js",
+  "description": "A water cooler Slack bot that interacts with users and posts popular messages to the watercooler channel",
+  "main": "app.js",
   "keywords": [],
-  "author": "Goutham Reddy",
+  "author": "Goutham Reddy <gouthamvreddy@gmail.com>",
+  "contributors": [
+    {
+      "name": "Jason Studstill",
+      "email": "jason@jasonstudstill.com",
+      "url": "jasonstudstill.com"
+    }
+  ],
   "license": "ISC",
   "dependencies": {
     "@slack/client": "^2.3.0",
     "superagent": "^1.8.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gouthamvreddy/watercooler-portal.git"
   }
 }
