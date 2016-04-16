@@ -1,16 +1,19 @@
-var Slack = require('@slack/client');
-var request = require('superagent');
-var RtmClient = Slack.RtmClient;
-var RTM_EVENTS = Slack.RTM_EVENTS;
+'use strict';
 
-var TOKEN = process.env.SLACK_TOKEN || '';
+const Slack = require('@slack/client');
+const request = require('superagent');
+const RtmClient = Slack.RtmClient;
+const RTM_EVENTS = Slack.RTM_EVENTS;
+const _helpers = require('./helpers');
+const TOKEN = process.env.SLACK_TOKEN || _helpers.getToken();
 
-var rtm = new RtmClient(TOKEN, { logLevel: 'info' });
+let rtm = new RtmClient(TOKEN, { logLevel: 'info' });
 
 rtm.start();
+console.log('Slack Real Time Messaging Client Started');
 
 rtm.on(RTM_EVENTS.REACTION_ADDED, function(message) {
-  var channel = message.item.channel;
+  let channel = message.item.channel;
   //Get a list of reactions for the specific message that a reaction was added to
   request.get('https://slack.com/api/reactions.get')
         .query({token: TOKEN})
@@ -18,14 +21,14 @@ rtm.on(RTM_EVENTS.REACTION_ADDED, function(message) {
         .query({timestamp: message.item.ts})
         .end(function(err,res){
           //Count number of unique users who have a reaction
-          var uniqueUsers = [];
+          let uniqueUsers = [];
           res.body.message.reactions.map(function(message){
             message.users.map(function(user){
               if(uniqueUsers.indexOf(user) == -1)
                 uniqueUsers.push(user);
             })
           })
-          var text = res.body.message.text;
+          let text = res.body.message.text;
           console.log(res.body.message);
           //If more than 1 user has added a reaction to message, post the message in the Watercooler channel
           if(uniqueUsers.length > 1) {
