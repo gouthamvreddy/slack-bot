@@ -13,7 +13,7 @@ rtm.start();
 console.log('Slack Real Time Messaging Client Started');
 
 // Listen for Reactions
-rtm.on(RTM_EVENTS.REACTION_ADDED, function(message) {
+rtm.on(RTM_EVENTS.REACTION_ADDED, message => {
   let channel = message.item.channel;
   let options = {
     token: TOKEN,
@@ -21,11 +21,11 @@ rtm.on(RTM_EVENTS.REACTION_ADDED, function(message) {
     timestamp: message.item.ts
   };
   //Get list of reactions for the specific message that a reaction was added to
-  _helpers.getMessage(options).then(function(res) {
+  _helpers.getMessage(options).then(res => {
     //Count number of unique users who have a reaction
     let uniqueUsers = [];
-    res.body.message.reactions.map(function(message) {
-      message.users.map(function(user) {
+    res.body.message.reactions.map(message => {
+      message.users.map(user => {
         if (uniqueUsers.indexOf(user) == -1)
           uniqueUsers.push(user);
       });

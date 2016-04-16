@@ -14,22 +14,15 @@ module.exports = {
     }
   },
   // Fetch Slack Message
-  getMessage: function(options) {
+  getMessage: options => {
     return new Promise((resolve, reject) => {
-     let token = options.token || '';
-     let file = options.file || '';
-     let file_comment = options.file_comment || '';
-     let channel = options.channel || '';
-     let timestamp = options.timestamp || '';
-     let full = options.full || '';
-
       request.get('https://slack.com/api/reactions.get')
-        .query({token: token})
-        .query({file: file})
-        .query({file_comment: file_comment})
-        .query({channel: channel})
-        .query({timestamp: timestamp})
-        .query({full: full})
+        .query({token: options.token || ''})
+        .query({file: options.file || ''})
+        .query({file_comment: options.file_comment || ''})
+        .query({channel: options.channel || ''})
+        .query({timestamp: options.timestamp || ''})
+        .query({full: options.full || ''})
         .end((err, res) => {
           if (err) reject(err);
           else resolve(res);
@@ -37,14 +30,11 @@ module.exports = {
     });
   },
   // Fetch Slack User Info
-  getUserInfo: function(options) {
+  getUserInfo: options => {
     return new Promise((resolve, reject) => {
-      let token = options.token || '';
-      let user = options.user || '';
-
       request.get('https://slack.com/api/users.info')
-        .query({token: token})
-        .query({user: user})
+        .query({token: options.token || ''})
+        .query({user: options.user || ''})
         .end((err, res) => {
           if (err) reject(err);
           else resolve(res);
