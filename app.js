@@ -36,8 +36,7 @@ rtm.on(RTM_EVENTS.REACTION_ADDED, message => {
     if (uniqueUsers.length > 1) {
       options.user = res.body.message.user;
       _helpers.getUserInfo(options).then(res => {
-        rtm.sendMessage(res.body.user.profile.first_name +
-          ' says ' + text, 'C0ZPHKNDP');
+        rtm.sendMessage(`<@${res.body.user.id}> in <#${options.channel}>\n \`\`\`${text}\`\`\``, 'C1194DLMU');
       });
     }
   });
